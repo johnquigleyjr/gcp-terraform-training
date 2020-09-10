@@ -34,12 +34,7 @@ Terraform v0.12.6
 
 ### Step 1.3.1
 
-In the /workstation/terraform directory, edit the file titled `main.tf` to create a GCP instance with the following properties available in the comments at the top of the file:
-
-- Google Image ID
-- subnet_id
-- vpc_security_group_ids
-- tags.Identity
+In the /workstation/terraform directory, first rename your existing `main.tf` to `aws.tf.example` and then create a file titled `main.tf` to create a GCP instance.
 
 Your final `main.tf` file should look similar to this with different values:
 
@@ -49,6 +44,10 @@ provider "google" {
   project = "<YOUR_GCP_PROJECT>"
   region  = "us-east1"
   zone    = "us-east1-b"
+}
+
+resource "google_compute_network" "vpc_network" {
+  name = "terraform-network"
 }
 
 resource "google_compute_instance" "web" {
@@ -63,7 +62,7 @@ resource "google_compute_instance" "web" {
   }
   
     network_interface {
-      network = "default"
+      network = google_compute_network.vpc_network.name
 
       access_config {
 
