@@ -16,7 +16,7 @@ to and provision the instance remotely with a provisioner block.
 
 ### Step 6.1.1
 
-In `server/server.tf`, add a resource block (below your variables section) as follows:
+In `server/server.tf`, add a resource block (below your variables section) as follows to generate an SSH keypair:
 
 ```hcl
 resource "tls_private_key" "ssh-key" {
