@@ -109,7 +109,7 @@ Rendered template content may be used anywhere: as arguments to a module or reso
 
 The `templatefile` function can be referenced as a `local` :
 
-```bash
+```hcl
 output "iam_policy" {
   value = local.policy
 }
