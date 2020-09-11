@@ -16,7 +16,7 @@ When you rename a Google Compute Instance, terraform will reprovision the resour
 
 Open your `server\server.tf` file and add the suffix _renamed_ to the value for `name` as shown below:
 
-```bash
+```hcl
 resource "google_compute_instance" "web" {
   count        = var.num_webs
   name         = "${var.name}${count.index + 1}renamed"
@@ -88,7 +88,7 @@ We'll demonstrate how `prevent_destroy` can be used to guard an instance from be
 
 Add `prevent_destroy = true` to the same `lifecycle` stanza where you added `create_before_destroy`.
 
-```bash
+```hcl
 resource "google_compute_instance" "web" {
   
   # ...
@@ -125,7 +125,7 @@ Now that you have finished the steps in this lab, destroy the infrastructure you
 
 Remove the `prevent_destroy` attribute.
 
-```bash
+```hcl
 resource "google_compute_instance" "web" {
 
   # ...
