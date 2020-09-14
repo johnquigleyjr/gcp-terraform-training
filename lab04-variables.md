@@ -74,7 +74,7 @@ Rerun `terraform plan` and notice that this no longer prompts you for input.
 
 ### Step 4.3.2
 
-You'll see that there are several other values in `terraform.tfvars`. Uncomment them and add matching variables to your `main.tf` file:
+Add additional variables to your `main.tf` file, and create matching key/value pairs in your terraform.tfvars that match your environment:
 
 ```hcl
 variable "access_key" {}
