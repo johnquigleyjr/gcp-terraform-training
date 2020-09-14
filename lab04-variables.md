@@ -77,8 +77,8 @@ Rerun `terraform plan` and notice that this no longer prompts you for input.
 Add additional variables to your `main.tf` file, and create matching key/value pairs in your terraform.tfvars that match your environment:
 
 ```hcl
-variable "access_key" {}
-variable "secret_key" {}
+variable "project" {}
+variable "zone" {}
 variable "region" {
   default = "<REGION>"
 }
