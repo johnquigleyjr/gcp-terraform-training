@@ -109,7 +109,7 @@ resource "google_compute_instance" "web" {
 
     }
   }
-  tags = [var.identity,"YourName","env1"]
+  tags = [var.identity,"yourname","env1"]
 }
 ```
 
