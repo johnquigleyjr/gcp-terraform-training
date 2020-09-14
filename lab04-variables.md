@@ -84,6 +84,7 @@ variable "region" {
 }
 variable "image" {}
 variable "identity" {}
+variable "name" {}
 ```
 
 ### Step 4.3.3
