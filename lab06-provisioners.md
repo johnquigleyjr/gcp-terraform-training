@@ -1,6 +1,6 @@
 # Lab 6: Provisioners
 
-Duration: 10 minutes
+Duration: 30 minutes
 
 Your workstation has code for provisioning the webapp onto the instance we've
 created. In order for this code to be installed onto the, Terraform can connect
@@ -9,7 +9,7 @@ to and provision the instance remotely with a provisioner block.
 - Task 1: Add a resource block to generate an SSH keypair
 - Task 2: Create a connection block using your keypair outputs.
 - Task 3: Create a provisioner block to remotely download code to your instance.
-- Task 4: Add a firewall rule to permit SSH
+- Task 4: Add a firewall rule to permit SSH and HTTP
 - Task 5: Apply your configuration and watch for the remote connection.
 
 ## Task 1: Add a resource block to generate an SSH keypair.
@@ -126,6 +126,24 @@ resource "google_compute_firewall" "gcp-externalssh" {
   allow {
     protocol = "tcp"
     ports    = ["22"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+}
+```
+
+### Step 6.4.2
+
+To enable external http access to your Google Compute instance, we need to create a firewall rule to allow TCP port 80 to your instance.  Add the following to your `server/server.tf`:
+
+```hcl
+resource "google_compute_firewall" "gcp-externalhttp" {
+  name    = "gcp-externalhttp"
+  network = google_compute_network.vpc_network.name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80"]
   }
 
   source_ranges = ["0.0.0.0/0"]
