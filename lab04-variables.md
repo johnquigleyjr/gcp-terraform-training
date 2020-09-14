@@ -61,7 +61,7 @@ can avoid this by creating a variables file. You'll find a file called
 
 ### Step 4.3.1
 
-Edit the `terraform.tfvars` file by uncommenting the first two key-value pairs:
+Edit the `terraform.tfvars` file by creating the first two key-value pairs (where PROJECT and ZONE match the vaules for your environment):
 
 ```
 project = "<PROJECT>"
