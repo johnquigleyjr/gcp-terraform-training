@@ -31,7 +31,7 @@ Within your google_compute_instance resource block, under "tags", add the follow
 
 ```hcl
 metadata = {
-  ssh-keys = yourname:${tls_private_key.ssh-key.public_key_openssh}"
+  ssh-keys = "yourname:${tls_private_key.ssh-key.public_key_openssh}"
 }
 ```
 
