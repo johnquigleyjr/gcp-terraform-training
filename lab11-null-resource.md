@@ -41,7 +41,7 @@ resource "null_resource" "web_cluster" {
   # Bootstrap script can run on any instance of the cluster
   # So we just choose the first in this case
   connection {
-    host = "${element(google_compute_instance.web.*.network_interface[0].access_config[0].nat_ip, 0)}"
+    host = element(google_compute_instance.web.*.network_interface[0].access_config[0].nat_ip, 0)
   }
 
   provisioner "local-exec" {
