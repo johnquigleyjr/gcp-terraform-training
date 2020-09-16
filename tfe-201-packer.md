@@ -122,6 +122,14 @@ Validate your configuration.
   }
 ```
 
+```shell
+> packer validate web-vistors.json
+```
+
+```shell
+> packer build web-vistors.json
+```
+
 ##### Resources
 * Packer [Docs](https://www.packer.io/docs/index.html)
 * Packer [CLI](https://www.packer.io/docs/commands/index.html)
