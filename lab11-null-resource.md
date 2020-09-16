@@ -35,18 +35,18 @@ Add `null_resource` stanza to the `server.tf`.  Notice that the trigger for this
 resource "null_resource" "web_cluster" {
   # Changes to any instance of the cluster requires re-provisioning
   triggers = {
-    web_cluster_instance_ids = "${join(",", google_compute_instance.web.*.id)}"
+    web_cluster_instance_ids = "${join(",", google_compute_instance.web[*].id)}"
   }
 
   # Bootstrap script can run on any instance of the cluster
   # So we just choose the first in this case
   connection {
-    host = element(google_compute_instance.web.*.network_interface[0].access_config[0].nat_ip, 0)
+    host = element(google_compute_instance.web[*].network_interface[0].access_config[0].nat_ip, 0)
   }
 
   provisioner "local-exec" {
     # Bootstrap script called with private_ip of each node in the clutser
-    command = "echo ${join("First Node of the Cluster is : ", google_compute_instance.web.*.network_interface.0.network_ip)}"
+    command = "echo ${join("First Node of the Cluster is : ", google_compute_instance.web[*].network_interface.0.network_ip)}"
   }
 }
 ```
