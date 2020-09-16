@@ -1,4 +1,4 @@
-# Lab 3: Template Creation using Packer
+Template Creation using Packer
 
 Duration: 30 minutes
 
