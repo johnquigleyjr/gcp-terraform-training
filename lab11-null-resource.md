@@ -35,7 +35,7 @@ Add `null_resource` stanza to the `server.tf`.  Notice that the trigger for this
 resource "null_resource" "web_cluster" {
   # Changes to any instance of the cluster requires re-provisioning
   triggers = {
-    web_cluster_instance_ids = "${join(",", google_compute_instance.web[*].id)}"
+    web_cluster_size = length(google_compute_instance.web)
   }
 
   # Bootstrap script can run on any instance of the cluster
@@ -46,14 +46,14 @@ resource "null_resource" "web_cluster" {
 
   provisioner "local-exec" {
     # Bootstrap script called with private_ip of each node in the clutser
-    command = "echo ${join("First Node of the Cluster is : ", google_compute_instance.web[*].network_interface.0.network_ip)}"
+    command = "echo ${join(" Cluster local IP is : ", google_compute_instance.web[*].network_interface.0.network_ip)}"
   }
 }
 ```
 Initialize the configuration with a `terraform init` followed by a `plan` and `apply`.
 
 ### Step 11.2.2: Re-run `plan` and `apply` to trigger `null_resource`
-After the infrastructure has completed its buildout, re-run a plan and apply and notice that the null resource is triggered.  This is because the `annotation` attribute of our VM was updated with a new time stamp.
+After the infrastructure has completed its buildout, change your machine count (in your terraform.tfvars) and re-run a plan and apply and notice that the null resource is triggered.  This is because the "cluster size" changed, triggering our null_resource.
 
 ```shell
 terraform apply
